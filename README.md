@@ -1,12 +1,16 @@
-# ESP-NODE-2RDM hardware
+# Ghostlight Node
 
-Open-source, low-cost **Art-Net / sACN to DMX512 node** with **two bidirectional (RDM-capable) DMX ports**, built around an ESP32-S3 and a W5500 Ethernet controller. Powered over USB-C, a 5 V input, or **802.3af PoE**.
+Open-source hardware for the **Ghostlight Node**: a low-cost **Art-Net / sACN to DMX512 node** with **two bidirectional (RDM-capable) DMX ports**, built around an ESP32-S3 and a W5500 Ethernet controller. Powered over USB-C, a 5 V input, or **802.3af PoE**.
 
-This repository holds the hardware (rev1). The firmware lives in the separate ESP-NODE-2RDM / WIFIDMX firmware repository; see [docs/13-firmware-integration.md](docs/13-firmware-integration.md) for the pin map and the config changes this board needs.
+This repository holds the hardware (rev1). The firmware lives in a separate repository, where this board is currently identified as `ESP-NODE-2RDM` (the `BOARD_NAME` in its `board.h`); see [docs/13-firmware-integration.md](docs/13-firmware-integration.md) for the pin map and the config changes this board needs.
 
 | Front | Back (silkscreen only, mirrored) |
 |---|---|
 | ![front](docs/images/board-front.png) | ![back](docs/images/board-back.png) |
+
+## The name
+
+A *ghost light* is the single bulb left burning on an otherwise dark stage. The node does the same quiet job: it keeps the rig alive and listening while nothing else is on. "Ghostlight Node" has not been trademark-cleared; search your own country's register before selling boards under it.
 
 ## Features
 
@@ -30,7 +34,7 @@ This repository holds the hardware (rev1). The firmware lives in the separate ES
 | Path | Contents |
 |---|---|
 | `hardware/kicad/` | KiCad 7 project: board, schematic, symbol library `ESPNODE`, footprint library `ESPNODE.pretty` |
-| `fabrication/` | Gerbers + drill (`esp-node-2rdm-rev1-gerbers.zip` is the upload for JLCPCB), `gerbers/pos.csv` placement file |
+| `fabrication/` | Gerbers + drill (`ghostlight-node-rev1-gerbers.zip` is the upload for JLCPCB), `gerbers/pos.csv` placement file |
 | `bom/` | `BOM_order.csv` (per line, with reference designators), `BOM_order_purchase.csv` (LCSC part + quantity per board), `netlist.net` |
 | `docs/` | Full documentation (see index below), schematic PDF, images |
 | `tools/generator/` | Python scripts that generated the board and schematic (reference only, see `tools/generator/README.md`) |
@@ -57,7 +61,7 @@ The schematic is in [docs/schematic.pdf](docs/schematic.pdf) (net-label style, g
 
 ## Quick start (ordering a prototype)
 
-1. Upload `fabrication/esp-node-2rdm-rev1-gerbers.zip` to JLCPCB: 2 layers, 100 x 100 mm, 1.6 mm, HASL lead-free.
+1. Upload `fabrication/ghostlight-node-rev1-gerbers.zip` to JLCPCB: 2 layers, 100 x 100 mm, 1.6 mm, HASL lead-free.
 2. Import `bom/BOM_order_purchase.csv` into LCSC's BOM tool, multiply by the number of boards, add about 10 % spares for passives, and check stock (see [docs/08-ordering-guide.md](docs/08-ordering-guide.md)).
 3. Assemble by hand following [docs/09-assembly-guide.md](docs/09-assembly-guide.md).
 4. Bring up in the order in [docs/10-bring-up-and-test.md](docs/10-bring-up-and-test.md): USB power, 3V3, Ethernet, DMX, then PoE.
@@ -69,3 +73,7 @@ Hardware design files are released under the **CERN Open Hardware Licence Versio
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Hardware bug reports from a built board are the most valuable contribution.
+
+## Trademarks
+
+Art-Net is a trademark of Artistic Licence Engineering Ltd. ESP32 is a trademark of Espressif Systems. W5500 is a trademark of WIZnet. USB-C, PoE and other names belong to their respective owners. They are used here only to describe compatibility.

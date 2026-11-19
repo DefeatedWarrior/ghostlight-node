@@ -114,15 +114,16 @@ def try_block(blk):
     return False
 done = False
 for ts in (2.4, 2.0, 1.6):
-    blk = [(ts, "ESP-NODE-2RDM", True), (1.0, "rev1  Art-Net/sACN > DMX512 x2", False), (1.0, "PoE 802.3af / USB-C / RDM", False), (1.0, "Open hardware CERN-OHL-P-2.0", False)]
+    blk = [(ts, "GHOSTLIGHT NODE", True), (1.0, "rev1  Art-Net/sACN > DMX512 x2", False), (1.0, "PoE 802.3af / USB-C / RDM", False), (1.0, "Open hardware CERN-OHL-P-2.0", False)]
     if try_block(blk): done = True; break
 if not done: skipped.append("BRANDING BLOCK")
 # back side info
-back = ["ESP-NODE-2RDM rev1", "CERN-OHL-P-2.0 open hardware", "DMX1 UART1 TX17 RX16 DIR39  BIAS1 IO1",
+back = ["GHOSTLIGHT NODE rev1", "CERN-OHL-P-2.0 open hardware", "DMX1 UART1 TX17 RX16 DIR39  BIAS1 IO1",
         "DMX2 UART2 TX15 RX18 DIR40  BIAS2 IO2", "W5500 CS10 MOSI11 MISO13 SCK12 INT9 RST4",
         "PORT LED IO5 IO6  STATUS WS2812 IO48  BOOT IO0"]
 yy = 20
 for i, line in enumerate(back):
     place(line, [(50, yy, 'c')], size=1.2 if i == 0 else 1.0, layer=BS, bold=(i == 0)); yy += 2.2
+tb = b.GetTitleBlock(); tb.SetTitle('Ghostlight Node rev1'); tb.SetDate('2026-11'); tb.SetRevision('1'); tb.SetCompany('Open hardware (CERN-OHL-P-2.0)'); b.SetTitleBlock(tb)
 pcbnew.SaveBoard(sys.argv[2], b)
 print("skipped:", skipped)

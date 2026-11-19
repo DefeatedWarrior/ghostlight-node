@@ -1,4 +1,4 @@
-(kicad_symbol_lib (version 20221018) (generator esp-node-2rdm)
+(kicad_symbol_lib (version 20221018) (generator ghostlight-node)
   (symbol "HR871150C" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
     (property "Reference" "J" (at 0 15.16 0)
       (effects (font (size 1.27 1.27)))

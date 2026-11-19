@@ -48,7 +48,7 @@ Each app slot is 1.625 MB, which leaves about 0.5 MB of headroom over a 1.1 MB a
 The existing DMX and W5500 pins already match the hardware. Port LEDs and the new signals need updates:
 
 ```c
-#define BOARD_NAME              "ESP-NODE-2RDM"
+#define BOARD_NAME              "ESP-NODE-2RDM"   /* existing firmware identifier; the product is the Ghostlight Node */
 #define BOARD_DMX_PORTS         2
 
 /*                               port 1  port 2 */

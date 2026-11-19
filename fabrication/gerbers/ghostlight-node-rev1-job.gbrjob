@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "7.0.11+dfsg-1build4"
     },
-    "CreationDate": "2026-11-11T11:09:18+11:00"
+    "CreationDate": "2026-11-20T09:58:00+11:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "esp-node-2rdm-rev1",
-      "GUID": "62657374-2e6b-4696-9361-645f70636258",
-      "Revision": "rev?"
+      "Name": "ghostlight-node-rev1",
+      "GUID": "67686f73-746c-4696-9768-742d6e6f6465",
+      "Revision": "1"
     },
     "Size": {
       "X": 100.1,
@@ -34,47 +34,47 @@
   ],
   "FilesAttributes": [
     {
-      "Path": "esp-node-2rdm-rev1-F_Cu.gtl",
+      "Path": "ghostlight-node-rev1-F_Cu.gtl",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "esp-node-2rdm-rev1-B_Cu.gbl",
+      "Path": "ghostlight-node-rev1-B_Cu.gbl",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "esp-node-2rdm-rev1-F_Paste.gtp",
+      "Path": "ghostlight-node-rev1-F_Paste.gtp",
       "FileFunction": "SolderPaste,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "esp-node-2rdm-rev1-B_Paste.gbp",
+      "Path": "ghostlight-node-rev1-B_Paste.gbp",
       "FileFunction": "SolderPaste,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "esp-node-2rdm-rev1-F_Silkscreen.gto",
+      "Path": "ghostlight-node-rev1-F_Silkscreen.gto",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "esp-node-2rdm-rev1-B_Silkscreen.gbo",
+      "Path": "ghostlight-node-rev1-B_Silkscreen.gbo",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "esp-node-2rdm-rev1-F_Mask.gts",
+      "Path": "ghostlight-node-rev1-F_Mask.gts",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "esp-node-2rdm-rev1-B_Mask.gbs",
+      "Path": "ghostlight-node-rev1-B_Mask.gbs",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "esp-node-2rdm-rev1-Edge_Cuts.gm1",
+      "Path": "ghostlight-node-rev1-Edge_Cuts.gm1",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }

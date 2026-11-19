@@ -2,7 +2,7 @@
 
 ## 1. PCB (JLCPCB or any fab)
 
-Upload `fabrication/esp-node-2rdm-rev1-gerbers.zip` (12 files: 2 copper layers, 2 masks, 2 silkscreens, 2 paste, outline, drill, drill map, job file).
+Upload `fabrication/ghostlight-node-rev1-gerbers.zip` (12 files: 2 copper layers, 2 masks, 2 silkscreens, 2 paste, outline, drill, drill map, job file).
 
 | Setting | Value |
 |---|---|

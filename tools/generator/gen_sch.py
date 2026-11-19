@@ -38,7 +38,7 @@ J1_PINS = [("1","TD+"),("2","TD-"),("3","CT"),("4","RD+"),("5","RD-"),("7","VC1+
            ("11","LED_Y_A"),("12","LED_Y_K"),("13","LED_G_A"),("14","LED_G_K"),("SH","SHIELD")]
 CUSTOM = {"ESPNODE:HR871150C": custom("HR871150C", "J", "ESPNODE:RJ45_Hanrun_HR871150C", J1_PINS)}
 # project symbol lib file
-lib = SymbolLib(); lib.version = "20221018"; lib.generator = "esp-node-2rdm"
+lib = SymbolLib(); lib.version = "20221018"; lib.generator = "ghostlight-node"
 lib.symbols = [CUSTOM["ESPNODE:HR871150C"]]
 lib.to_file(os.path.join(os.path.dirname(OUT), "ESPNODE.kicad_sym"))
 for k, s in CUSTOM.items(): s.libraryNickname = k.split(":")[0]; s.entryName = k.split(":")[1]
@@ -74,7 +74,7 @@ def allpins(sym):
 sch = Schematic.create_new()
 sch.uuid = uid(); sch.version = "20230121"; sch.generator = "eeschema"
 sch.paper = PageSettings(paperSize="A0")
-sch.titleBlock = TitleBlock(title="ESP-NODE-2RDM rev1", date="2026-11", revision="1", company="Open hardware (CERN-OHL-P-2.0)",
+sch.titleBlock = TitleBlock(title="Ghostlight Node rev1", date="2026-11", revision="1", company="Open hardware (CERN-OHL-P-2.0)",
                             comments={1: "Net-label style schematic generated from design.py; nets match the PCB"})
 nsym = {}
 def libsym(libid):

@@ -1,6 +1,6 @@
 # 1. Overview and specifications
 
-ESP-NODE-2RDM receives lighting data over the network (Art-Net or sACN over Ethernet, optionally Wi-Fi) and outputs it as DMX512 on two physical ports. Both ports use half-duplex RS-485 with direction control, so the hardware supports RDM (discovery and responder) as well as plain DMX output or input. Whether a given feature works is decided by the firmware.
+The Ghostlight Node receives lighting data over the network (Art-Net or sACN over Ethernet, optionally Wi-Fi) and outputs it as DMX512 on two physical ports. Both ports use half-duplex RS-485 with direction control, so the hardware supports RDM (discovery and responder) as well as plain DMX output or input. Whether a given feature works is decided by the firmware.
 
 ## Specifications
 

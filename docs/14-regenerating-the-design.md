@@ -23,7 +23,7 @@ The board and schematic were produced by Python scripts, kept in `tools/generato
 
 ## Editing the design by hand
 
-The simplest path for rev2 is to **open the KiCad project directly** (`hardware/kicad/esp-node-2rdm-rev1.kicad_pro`), edit the schematic and board in KiCad, and re-run DRC. Keep `design.py` only if you want to keep regenerating from scripts.
+The simplest path for rev2 is to **open the KiCad project directly** (`hardware/kicad/ghostlight-node-rev1.kicad_pro`), edit the schematic and board in KiCad, and re-run DRC. Keep `design.py` only if you want to keep regenerating from scripts.
 
 ## Exporting fabrication files from KiCad 7
 

@@ -24,9 +24,9 @@
 
 ## Silkscreen
 
-Front: reference designators, terminal pin names (B / A / GND), BOOT / RESET / USB-C / 5V IN labels, debug UART pin names, J5 pin names, "120R TERM" next to the termination jumpers, and a title block (ESP-NODE-2RDM rev1, "Art-Net/sACN > DMX512 x2", "PoE 802.3af / USB-C / RDM", "Open hardware CERN-OHL-P-2.0").
+Front: reference designators, terminal pin names (B / A / GND), BOOT / RESET / USB-C / 5V IN labels, debug UART pin names, J5 pin names, "120R TERM" next to the termination jumpers, and a title block (GHOSTLIGHT NODE rev1, "Art-Net/sACN > DMX512 x2", "PoE 802.3af / USB-C / RDM", "Open hardware CERN-OHL-P-2.0").
 
-Back: IN / OUT tags under each DMX terminal (the strip between the PoE module and the terminals fits only one row of front text, so these are on the back), board name and licence, and the GPIO map (DMX1, DMX2, W5500, LEDs, BOOT).
+Back: IN / OUT tags under each DMX terminal (the strip between the PoE module and the terminals fits only one row of front text, so these are on the back), board name, licence and the GPIO map (DMX1, DMX2, W5500, LEDs, BOOT).
 
 The DMX A / B polarity is intentionally **not** stated as D+ / D- on the silkscreen until it is verified on hardware.
 

@@ -7,3 +7,5 @@ These Python scripts generated the rev1 board, schematic and BOM. See [docs/14-r
 - `design.py` is the netlist source of truth (parts, values, nets, LCSC numbers). `layout.py` holds placement overrides.
 - The hand-made footprints (`ESPNODE.pretty`) are checked in under `hardware/kicad/`; there is no script for them in this folder.
 - Treat the checked-in board in `hardware/kicad/` as the source for manufacturing. Re-running the pipeline will give a different (non-deterministic) routing.
+
+The scripts and file prefixes still use the working name `esp-node-2rdm` in places; the product is the Ghostlight Node.

@@ -2,6 +2,8 @@
 
 ## rev1 (unreleased, untested)
 
+Named **Ghostlight Node** (repository `ghostlight-node`). The firmware still calls the board `ESP-NODE-2RDM`.
+
 First complete design.
 
 - 100 x 100 mm, 2-layer board with ESP32-S3-WROOM-1-N8, W5500 Ethernet and two SN65HVD72 DMX ports.
