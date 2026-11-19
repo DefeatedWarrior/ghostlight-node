@@ -43,8 +43,8 @@ rev1 has **not been built or tested**. This page separates what was checked from
 
 ### Firmware compatibility (not hardware bugs)
 
-18. The firmware repository still targets the N16R8 module (16 MB flash, 8 MB octal PSRAM). It will not boot on the N8 until PSRAM is disabled and the flash size and partition table are cut to 8 MB. See [docs/13](13-firmware-integration.md).
-19. `BOARD_PORT_LED_GPIO` is `{-1, -1}` in the firmware; the board has port LEDs on GPIO5 and GPIO6.
+18. The N8 changes (8 MB flash, PSRAM off, 8 MB partition table) are applied in [`firmware/`](../firmware/) but **have not been built or run**: ESP-IDF was not available when they were made. Delete any old generated `sdkconfig` and run `idf.py fullclean` so the new defaults take effect. See [docs/13](13-firmware-integration.md).
+19. `BOARD_PORT_LED_GPIO` is now `{5, 6}` in `firmware/` (untested). `BOARD_DMX_BIAS_GPIO` and `BOARD_W5500_RST_GPIO` are defined but not used by any code yet.
 20. The firmware does not drive the W5500 reset (the driver is configured with `reset_gpio_num = -1`) or the DMX bias pins (GPIO1 / GPIO2). The W5500 reset line has a pull-up so the part runs, and the bias networks are off by default.
 21. UART0 is shared by the J7 debug console and J5 pins 4-5; a third DMX port on J5 means using USB for the console.
 

@@ -77,3 +77,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Hardware bug reports from a built board 
 ## Trademarks
 
 Art-Net is a trademark of Artistic Licence Engineering Ltd. ESP32 is a trademark of Espressif Systems. W5500 is a trademark of WIZnet. USB-C, PoE and other names belong to their respective owners. They are used here only to describe compatibility.
+
+## Firmware
+
+`firmware/` holds the ESP-IDF firmware (MIT licence, see `firmware/LICENSE`), adjusted for the N8 module. It has not been built or run on hardware yet; see [docs/13](docs/13-firmware-integration.md).

@@ -2,6 +2,8 @@
 
 The firmware lives in the separate firmware repository (ESP-IDF project with `components/board/include/board.h`). This page lists what the rev1 hardware needs from it. **None of these firmware changes have been applied or tested**; they were written from reading the firmware's `board.h`, `sdkconfig.defaults`, `partitions.csv` and `network_manager.c`.
 
+> **Status:** sections 1, 2 and the port-LED part of 3 are already applied in [`firmware/`](../firmware/). The build and the partition table are untested (no ESP-IDF was available); the 8 MB table was checked only for overlaps, 64 KB app alignment and total size (ends at 0x770000). Regenerate `sdkconfig` before building.
+
 ## 1. Required: switch from N16R8 to the N8 module
 
 The firmware currently assumes 16 MB flash and 8 MB octal PSRAM. The N8 module has 8 MB quad flash and **no PSRAM**.
