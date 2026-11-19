@@ -1,0 +1,10 @@
+# KiCad
+*.kicad_prl
+*-backups/
+fp-info-cache
+_autosave-*
+*.bak
+*.lck
+*~
+# generated, not source
+fabrication/*.tmp
