@@ -131,9 +131,9 @@ ESP-NODE-2RDM is a professional lighting control device that converts network pr
 
 | Component | Specification |
 |-----------|--------------|
-| **MCU** | ESP32-S3-WROOM-1-N16R8 |
-| **Flash Memory** | 16 MB |
-| **PSRAM** | 8 MB (Octal SPI) |
+| **MCU** | ESP32-S3-WROOM-1-N8 |
+| **Flash Memory** | 8 MB |
+| **PSRAM** | None |
 | **Ethernet** | W5500 (SPI interface) |
 | **WiFi** | 802.11 b/g/n (2.4 GHz) |
 | **DMX Ports** | 2× RS485 transceivers |
@@ -170,7 +170,7 @@ ESP-NODE-2RDM is a professional lighting control device that converts network pr
 - Git
 
 **Hardware Requirements:**
-- ESP32-S3 development board with ≥16MB Flash and 8MB PSRAM
+- ESP32-S3 development board with ≥8MB Flash (no PSRAM needed)
 - W5500 Ethernet module
 - 2× RS485 transceivers (MAX485 or similar)
 - WS2812 RGB LED (optional, for status indication)
@@ -486,9 +486,9 @@ ESP-NODE-2RDM là thiết bị điều khiển ánh sáng chuyên nghiệp, chuy
 
 | Linh kiện | Thông số |
 |-----------|----------|
-| **MCU** | ESP32-S3-WROOM-1-N16R8 |
-| **Flash Memory** | 16 MB |
-| **PSRAM** | 8 MB (Octal SPI) |
+| **MCU** | ESP32-S3-WROOM-1-N8 |
+| **Flash Memory** | 8 MB |
+| **PSRAM** | None |
 | **Ethernet** | W5500 (giao diện SPI) |
 | **WiFi** | 802.11 b/g/n (2.4 GHz) |
 | **Cổng DMX** | 2× RS485 transceivers |
@@ -525,7 +525,7 @@ ESP-NODE-2RDM là thiết bị điều khiển ánh sáng chuyên nghiệp, chuy
 - Git
 
 **Yêu cầu phần cứng:**
-- Bo mạch phát triển ESP32-S3 với ≥16MB Flash và 8MB PSRAM
+- Bo mạch phát triển ESP32-S3 với ≥8MB Flash (không cần PSRAM)
 - Module Ethernet W5500
 - 2× RS485 transceivers (MAX485 hoặc tương tự)
 - WS2812 RGB LED (tùy chọn, cho chỉ báo trạng thái)

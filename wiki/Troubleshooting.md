@@ -1,13 +1,45 @@
-# Troubleshooting
+# 🛠️ Troubleshooting
+
+## Power
 
 | Symptom | Check |
 |---|---|
-| Boot loop after flashing | Old `sdkconfig` still has PSRAM enabled: delete it and run `idf.py fullclean` |
-| No Ethernet link | W5500 3V3 and SPI lines, jack orientation, W5500_RST pull-up |
-| Fixture flickers or is dead | A/B swapped, termination, ground |
-| Phantom RDM responses | Bias/termination on an idle line, cable quality |
-| PoE does not power up | Switch/injector is 802.3af, DP9700 orientation, 5V_EXT feed |
-| Port LEDs dim | 1 kΩ series resistor; 330 Ω is suggested for rev2 |
-| Cannot flash | Hold BOOT while pressing RESET, check USB cable carries data |
+| Board browns out or resets on USB | A 500 mA port is not enough with Wi-Fi + Ethernet. Use PoE or external 5 V ([[Power]]) |
+| +5V reads 4.5-4.7 V | Normal: the SS14 drop |
+| Hot AMS1117 | Normal at 0.5 A (about 0.5-0.7 W); check for shorts if it is far hotter |
+| Two supplies fighting | PoE and J6 share `5V_EXT`; use only one |
 
-Known hardware issues: `docs/11-known-issues-and-verification-status.md`.
+## Flashing and boot
+
+| Symptom | Check |
+|---|---|
+| Boot loop after flashing | Old `sdkconfig` still has PSRAM enabled: delete it, `idf.py fullclean` |
+| Cannot enter download mode | Hold BOOT, tap RESET, release BOOT; use a data-capable USB cable |
+| No console | UART0 is shared with J5 pins 4-5; use USB console if a daughterboard is fitted |
+
+## Ethernet
+
+| Symptom | Check |
+|---|---|
+| No link LED | Jack pin map, TX/RX pairs, magjack orientation |
+| W5500 not detected | 25 MHz crystal, AVDD 3V3, SPI lines, RST/INT pull-ups |
+| Link but no IP | Switch/DHCP; try static IP in the web UI |
+
+## DMX
+
+| Symptom | Check |
+|---|---|
+| Fixture does not respond | Swap A and B; check ground and termination |
+| Flicker | Termination, cable quality, bias contention |
+| Phantom RDM responses | Enable bias, check termination and idle differential |
+| Port LEDs dim | 1 kΩ series resistor; use 330 Ω |
+| Receive unreliable | DIR pin state, TVS orientation, bus idle level |
+
+## PoE
+
+| Symptom | Check |
+|---|---|
+| No power from PoE | Switch is 802.3af, PS1 orientation, 5V_EXT at C50 |
+| Smoke or damage risk | Never use a passive 24/48 V injector without 802.3af detection |
+
+Still stuck? Open an [issue](https://github.com/DefeatedWarrior/ghostlight-node/issues) with photos and measurements.

@@ -1,0 +1,1 @@
+Ghostlight Node rev1 · hardware [CERN-OHL-P-2.0](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/LICENSE) · firmware MIT · [Repository](https://github.com/DefeatedWarrior/ghostlight-node) · [Report an issue](https://github.com/DefeatedWarrior/ghostlight-node/issues)
