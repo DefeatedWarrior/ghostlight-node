@@ -1,6 +1,6 @@
 # 💾 Firmware
 
-The firmware lives in [`firmware/`](https://github.com/DefeatedWarrior/ghostlight-node/tree/main/firmware). It uses ESP-IDF v5.2.6 and the MIT licence, and started as **ESP-NODE-2RDM** by ThinhCNTT22. It still calls itself `ESP-NODE-2RDM` in places.
+The firmware lives in its own repository, [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware). It uses ESP-IDF v5.2.6 and the MIT licence, and started as **ESP-NODE-2RDM** by ThinhCNTT22. It still calls itself `ESP-NODE-2RDM` in places.
 
 > [!WARNING]
 > The rev1 build compiles with no warnings, and CI builds it on every change, but **it has not been run on a Ghostlight board yet**. The same firmware runs on the N16R8 dev-board prototype.
@@ -8,7 +8,8 @@ The firmware lives in [`firmware/`](https://github.com/DefeatedWarrior/ghostligh
 ## Build and flash
 
 ```bash
-cd firmware
+git clone https://github.com/DefeatedWarrior/ghostlight-node-firmware.git
+cd ghostlight-node-firmware
 tools/build.sh ghostlight-rev1                          # build
 tools/build.sh ghostlight-rev1 -p /dev/ttyACM0 flash monitor
 ```
@@ -61,4 +62,4 @@ Under **menuconfig → ESP-NODE → Features** (`tools/build.sh ghostlight-rev1 
 
 With no PSRAM everything runs from the 512 KB internal SRAM, about half of which is used statically. Watch `heap_caps_get_free_size()` during an Art-Net/sACN burst with Wi-Fi, Ethernet and the web UI active.
 
-More: [`firmware/docs/DEVELOPING.md`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/firmware/docs/DEVELOPING.md) and [`docs/13-firmware-integration.md`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/docs/13-firmware-integration.md).
+More: [`docs/DEVELOPING.md`](https://github.com/DefeatedWarrior/ghostlight-node-firmware/blob/main/docs/DEVELOPING.md) and [`docs/13-firmware-integration.md`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/docs/13-firmware-integration.md).

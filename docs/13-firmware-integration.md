@@ -1,8 +1,8 @@
 # 13. Firmware integration
 
-The firmware lives in [`firmware/`](../firmware/) (ESP-IDF 5.2.6). This page lists what the rev1 hardware needs from it.
+The firmware lives in its own repository, [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware) (ESP-IDF 5.2.6). This page lists what the rev1 hardware needs from it.
 
-> **Status:** everything below is done. rev1 has its own board profile: settings in `firmware/boards/ghostlight-rev1/sdkconfig.defaults`, pins in `firmware/components/board/include/boards/ghostlight_rev1.h`, partition table `firmware/partitions_8mb.csv`. Build and flash with `cd firmware && tools/build.sh ghostlight-rev1 -p PORT flash monitor` (plain `idf.py build` builds rev1 too). It builds with no warnings and the app fits its slot with 32 % to spare, but **it has not been run on a Ghostlight board yet**. See [`firmware/docs/DEVELOPING.md`](../firmware/docs/DEVELOPING.md) for the other boards and the build-time feature switches.
+> **Status:** everything below is done. rev1 has its own board profile: settings in `boards/ghostlight-rev1/sdkconfig.defaults`, pins in `components/board/include/boards/ghostlight_rev1.h`, partition table `partitions_8mb.csv` (paths in the firmware repository). Build and flash with `tools/build.sh ghostlight-rev1 -p PORT flash monitor` (plain `idf.py build` builds rev1 too). It builds with no warnings and the app fits its slot with 32 % to spare, but **it has not been run on a Ghostlight board yet**. See [`docs/DEVELOPING.md`](https://github.com/DefeatedWarrior/ghostlight-node-firmware/blob/main/docs/DEVELOPING.md) for the other boards and the build-time feature switches.
 
 ## 1. N16R8 to N8 module (done: board profile)
 

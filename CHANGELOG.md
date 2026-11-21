@@ -6,6 +6,7 @@ Named **Ghostlight Node** (repository `ghostlight-node`). The firmware still cal
 
 First complete design.
 
+- The firmware moved to its own repository, [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware), with its full history. `firmware/` and its CI workflow were removed from this repository. The two entries below describe it before the move.
 - `firmware/`: ESP-NODE-2RDM firmware (MIT, ThinhCNTT22) with N8 changes applied: 8 MB flash, PSRAM disabled, 8 MB partition table, port LEDs on GPIO5/6.
 - `firmware/`: board profiles (`tools/build.sh ghostlight-rev1 | esp-node-2rdm | esp32-devkitc`) with one partition table per flash size, build-time feature switches (menuconfig > ESP-NODE > Features), DMX bias switches and the W5500 hardware reset driven on rev1, `main.c` split into smaller files, CI builds for every board, and `firmware/docs/DEVELOPING.md`. Builds cleanly; not run on a Ghostlight board yet.
 

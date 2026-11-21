@@ -11,7 +11,7 @@ Two RDM-capable DMX ports · ESP32-S3 · W5500 Ethernet · 802.3af PoE · USB-C
 ![firmware](https://img.shields.io/badge/firmware-ESP--IDF%20(MIT)-green)
 ![kicad](https://img.shields.io/badge/KiCad-7-lightgrey)
 
-[Docs](docs/) · [Wiki pages](wiki/Home.md) · [Ordering](docs/08-ordering-guide.md) · [Known issues](docs/11-known-issues-and-verification-status.md) · [Firmware](firmware/)
+[Docs](docs/) · [Wiki pages](wiki/Home.md) · [Ordering](docs/08-ordering-guide.md) · [Known issues](docs/11-known-issues-and-verification-status.md) · [Firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware)
 
 </div>
 
@@ -45,7 +45,7 @@ A *ghost light* is the single bulb left burning on an otherwise dark stage. The 
 2. **Order parts:** import `bom/BOM_order_purchase.csv` into LCSC's BOM tool, scale for your board count, add about 10 % spare passives, check stock ([guide](docs/08-ordering-guide.md)).
 3. **Assemble** by hand: [assembly guide](docs/09-assembly-guide.md).
 4. **Bring up** in order (USB power, 3V3, Ethernet, DMX, then PoE): [test plan](docs/10-bring-up-and-test.md).
-5. **Flash the firmware** from [`firmware/`](firmware/) with ESP-IDF 5.2.6: `cd firmware && tools/build.sh ghostlight-rev1 -p PORT flash monitor` ([firmware guide](firmware/docs/DEVELOPING.md), [hardware notes](docs/13-firmware-integration.md)).
+5. **Flash the firmware** from [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware) with ESP-IDF 5.2.6: clone it, then run `tools/build.sh ghostlight-rev1 -p PORT flash monitor` ([firmware guide](https://github.com/DefeatedWarrior/ghostlight-node-firmware/blob/main/docs/DEVELOPING.md), [hardware notes](docs/13-firmware-integration.md)).
 
 ## Repository layout
 
@@ -54,7 +54,6 @@ A *ghost light* is the single bulb left burning on an otherwise dark stage. The 
 | `hardware/kicad/` | KiCad 7 project, `ESPNODE` symbol library and `ESPNODE.pretty` footprints |
 | `fabrication/` | Gerber/drill zip for JLCPCB, individual gerbers, `pos.csv` |
 | `bom/` | `BOM_order.csv` (per line, with designators), `BOM_order_purchase.csv` (LCSC part + quantity), `netlist.net` |
-| `firmware/` | ESP-IDF firmware (MIT): board profiles for rev1 and other ESP32 boards, build-time feature switches |
 | `docs/` | Full documentation, schematic PDF, images |
 | `wiki/` | Wiki pages (Home, FAQ, troubleshooting...) ready to publish to the GitHub wiki |
 | `tools/generator/` | Python scripts that generated the board (reference only) |
@@ -73,7 +72,7 @@ The schematic is in [docs/schematic.pdf](docs/schematic.pdf).
 
 ## Firmware
 
-[`firmware/`](firmware/) is the ESP-IDF firmware (MIT, see `firmware/LICENSE`, originally ESP-NODE-2RDM by ThinhCNTT22). It has a board profile for rev1 (8 MB flash, no PSRAM, 8 MB partition table, port LEDs on GPIO5/6, DMX bias switches, W5500 reset), plus profiles for the N16R8 dev-board prototype and a plain ESP32 DevKitC. Optional features (sACN, RDM, scenes, DMX tools, web log, mDNS, Ethernet) can be switched off at build time. The firmware builds with ESP-IDF 5.2.6 for this board (`tools/build.sh ghostlight-rev1`) with no warnings, and CI builds it on every change. **It has not been run on a Ghostlight board yet**; the same firmware runs on the N16R8 dev-board prototype. The firmware still calls itself `ESP-NODE-2RDM` in places. See [firmware/docs/DEVELOPING.md](firmware/docs/DEVELOPING.md).
+The firmware is in its own repository, [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware): ESP-IDF, MIT, originally ESP-NODE-2RDM by ThinhCNTT22. It has a board profile for rev1 (8 MB flash, no PSRAM, 8 MB partition table, port LEDs on GPIO5/6, DMX bias switches, W5500 reset), plus profiles for the N16R8 dev-board prototype and a plain ESP32 DevKitC. Optional features (sACN, RDM, scenes, DMX tools, web log, mDNS, Ethernet) can be switched off at build time. The firmware builds with ESP-IDF 5.2.6 for this board (`tools/build.sh ghostlight-rev1`) with no warnings, and CI builds it on every change. **It has not been run on a Ghostlight board yet**; the same firmware runs on the N16R8 dev-board prototype. The firmware still calls itself `ESP-NODE-2RDM` in places. See its [DEVELOPING.md](https://github.com/DefeatedWarrior/ghostlight-node-firmware/blob/main/docs/DEVELOPING.md).
 
 ## Contributing
 
@@ -81,6 +80,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Results from a built board (photos, scop
 
 ## Licence
 
-Hardware files: **CERN-OHL-P-2.0** ([LICENSE](LICENSE)). Firmware: MIT ([firmware/LICENSE](firmware/LICENSE)).
+Hardware files: **CERN-OHL-P-2.0** ([LICENSE](LICENSE)). Firmware: MIT ([ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware/blob/main/LICENSE)).
 
 "Ghostlight Node" has not been trademark-cleared; check your own country's register before selling boards under it. Art-Net is a trademark of Artistic Licence Engineering Ltd; ESP32 of Espressif Systems; W5500 of WIZnet. Names are used only to describe compatibility.

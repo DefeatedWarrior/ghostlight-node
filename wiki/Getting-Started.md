@@ -11,7 +11,7 @@ flowchart LR
 
 ## 1. Get the files
 
-Clone the repository or download it. You need `fabrication/`, `bom/` and `firmware/`.
+Clone the repository or download it. You need `fabrication/` and `bom/`. The firmware is in a separate repository, [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware).
 
 ## 2. Order the PCB
 
@@ -27,7 +27,7 @@ Hand-assemble following [[Assembly Guide]], then power it up in the order in [[B
 
 ## 5. Flash and use
 
-Install ESP-IDF 5.2.6, then build and flash with `cd firmware && tools/build.sh ghostlight-rev1 -p PORT flash monitor` ([[Firmware]]). Then open the web interface ([[Using the Node]]).
+Install ESP-IDF 5.2.6, then clone [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware) and build and flash with `tools/build.sh ghostlight-rev1 -p PORT flash monitor` ([[Firmware]]). Then open the web interface ([[Using the Node]]).
 
 ## 🧰 What you need
 
