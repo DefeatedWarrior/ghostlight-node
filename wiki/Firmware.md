@@ -2,6 +2,8 @@
 
 The firmware lives in its own repository, [ghostlight-node-firmware](https://github.com/DefeatedWarrior/ghostlight-node-firmware). It uses ESP-IDF v5.2.6 and the MIT licence, and started as **ESP-NODE-2RDM** by ThinhCNTT22. It still calls itself `ESP-NODE-2RDM` in places.
 
+The firmware is not tied to the Ghostlight Node. It also runs on other ESP32-S3 and original ESP32 boards: anything with at least 4 MB of flash and one RS485 transceiver per DMX port. Ethernet through a W5500 is optional. You pick the board at build time.
+
 > [!WARNING]
 > The rev1 build compiles with no warnings, and CI builds it on every change, but **it has not been run on a Ghostlight board yet**. The same firmware runs on the N16R8 dev-board prototype.
 
@@ -25,6 +27,8 @@ To enter download mode over USB-C, hold **BOOT**, tap **RESET**, then release BO
 | `ghostlight-rev1` | this board (ESP32-S3-WROOM-1-N8) | 8 MB / none |
 | `esp-node-2rdm` | ESP32-S3 N16R8 dev-board prototype | 16 MB / 8 MB |
 | `esp32-devkitc` | original ESP32 DevKitC + W5500 + 2 transceivers (never run) | 4 MB / none |
+
+For any other board, add a profile: one pin header and one `sdkconfig.defaults` ([Adding a board](https://github.com/DefeatedWarrior/ghostlight-node-firmware/blob/main/docs/DEVELOPING.md#adding-a-board)). The pins of each board are listed in the [firmware README](https://github.com/DefeatedWarrior/ghostlight-node-firmware#-supported-hardware).
 
 Each board has its own partition table. Flashing a build made for a different board erases the stored settings and scenes.
 

@@ -1,6 +1,6 @@
 # ❓ FAQ
 
-**Is it tested?** No. rev1 has not been manufactured, and the firmware changes are unbuilt.
+**Is it tested?** No. rev1 has not been manufactured. Its firmware builds cleanly but has not run on a board.
 
 **Why N8 instead of N16R8?** The firmware is about 1.1 MB and does not need PSRAM, so the cheaper module is enough.
 
@@ -17,5 +17,7 @@
 **Why 100 × 100 mm?** JLCPCB's cheapest price tier has historically stopped there.
 
 **Can I sell it?** The licence allows it (CERN-OHL-P-2.0, permissive). The name "Ghostlight Node" is not trademark-cleared.
+
+**Does the firmware only run on this board?** No. It also runs on ESP32-S3 and original ESP32 dev boards with a W5500 and two RS485 transceivers, and other boards can be added. So far it has actually run only on the ESP32-S3 N16R8 dev-board prototype. See [[Firmware]].
 
 **Why does the firmware say ESP-NODE-2RDM?** That is the original firmware project name; the board is still reported under it.

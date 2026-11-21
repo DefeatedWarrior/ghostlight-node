@@ -40,6 +40,7 @@ A *ghost light* is the single bulb left burning on a dark stage. This node does 
 | **Power** | 802.3af PoE, USB-C, or external 5 V |
 | **Board** | 100 × 100 mm, 2 layers, 4 × M3 holes, hand-assembly friendly |
 | **Cost** | about USD 14-15 for the main parts before passives, PCB and shipping (snapshot) |
+| **Firmware** | [ESP-IDF, separate repository](https://github.com/DefeatedWarrior/ghostlight-node-firmware); also runs on ESP32-S3 and ESP32 dev boards ([[Firmware]]) |
 | **Licence** | Hardware CERN-OHL-P-2.0, firmware MIT |
 
 Source: [https://github.com/DefeatedWarrior/ghostlight-node](https://github.com/DefeatedWarrior/ghostlight-node)
