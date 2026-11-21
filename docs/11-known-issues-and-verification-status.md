@@ -43,9 +43,9 @@ rev1 has **not been built or tested**. This page separates what was checked from
 
 ### Firmware compatibility (not hardware bugs)
 
-18. The N8 changes (8 MB flash, PSRAM off, 8 MB partition table) are applied in [`firmware/`](../firmware/) but **have not been built or run**: ESP-IDF was not available when they were made. Delete any old generated `sdkconfig` and run `idf.py fullclean` so the new defaults take effect. See [docs/13](13-firmware-integration.md).
-19. `BOARD_PORT_LED_GPIO` is now `{5, 6}` in `firmware/` (untested). `BOARD_DMX_BIAS_GPIO` and `BOARD_W5500_RST_GPIO` are defined but not used by any code yet.
-20. The firmware does not drive the W5500 reset (the driver is configured with `reset_gpio_num = -1`) or the DMX bias pins (GPIO1 / GPIO2). The W5500 reset line has a pull-up so the part runs, and the bias networks are off by default.
+18. The rev1 board profile (8 MB flash, PSRAM off, 8 MB partition table) **builds cleanly** with ESP-IDF 5.2.6 (`tools/build.sh ghostlight-rev1`; the app uses 68 % of its 1.625 MB slot) but **has not been run on a board**. An old generated `sdkconfig` keeps its old settings: delete it before building. See [docs/13](13-firmware-integration.md).
+19. Port LEDs (GPIO5 / 6), the DMX bias switches (GPIO1 / 2: low at boot, high while the port is an output or RDM controller) and the W5500 hardware reset (GPIO4) are now driven by the firmware. None of this has been checked on hardware.
+20. Without PSRAM everything runs from internal SRAM (about 50 % is used statically); heap use under load with Wi-Fi, Ethernet and the web UI is not measured yet.
 21. UART0 is shared by the J7 debug console and J5 pins 4-5; a third DMX port on J5 means using USB for the console.
 
 ## Reporting results

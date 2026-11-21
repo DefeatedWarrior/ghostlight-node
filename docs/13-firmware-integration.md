@@ -1,12 +1,12 @@
 # 13. Firmware integration
 
-The firmware lives in the separate firmware repository (ESP-IDF project with `components/board/include/board.h`). This page lists what the rev1 hardware needs from it. **None of these firmware changes have been applied or tested**; they were written from reading the firmware's `board.h`, `sdkconfig.defaults`, `partitions.csv` and `network_manager.c`.
+The firmware lives in [`firmware/`](../firmware/) (ESP-IDF 5.2.6). This page lists what the rev1 hardware needs from it.
 
-> **Status:** sections 1, 2 and the port-LED part of 3 are already applied in [`firmware/`](../firmware/). The build and the partition table are untested (no ESP-IDF was available); the 8 MB table was checked only for overlaps, 64 KB app alignment and total size (ends at 0x770000). Regenerate `sdkconfig` before building.
+> **Status:** everything below is done. rev1 has its own board profile: settings in `firmware/boards/ghostlight-rev1/sdkconfig.defaults`, pins in `firmware/components/board/include/boards/ghostlight_rev1.h`, partition table `firmware/partitions_8mb.csv`. Build and flash with `cd firmware && tools/build.sh ghostlight-rev1 -p PORT flash monitor` (plain `idf.py build` builds rev1 too). It builds with no warnings and the app fits its slot with 32 % to spare, but **it has not been run on a Ghostlight board yet**. See [`firmware/docs/DEVELOPING.md`](../firmware/docs/DEVELOPING.md) for the other boards and the build-time feature switches.
 
-## 1. Required: switch from N16R8 to the N8 module
+## 1. N16R8 to N8 module (done: board profile)
 
-The firmware currently assumes 16 MB flash and 8 MB octal PSRAM. The N8 module has 8 MB quad flash and **no PSRAM**.
+The original firmware assumed 16 MB flash and 8 MB octal PSRAM. The N8 module has 8 MB quad flash and **no PSRAM**.
 
 In `sdkconfig.defaults`:
 
@@ -28,9 +28,9 @@ Delete `sdkconfig` (or run `idf.py fullclean` and regenerate) after editing the 
 
 The firmware allocates its diagnostic log ring from PSRAM with a fallback to internal RAM (`components/diag/diag.c`), so no code change is required for that, but check heap use with the larger buffers (Art-Net / sACN receive buffers, web UI) once PSRAM is gone.
 
-## 2. Required: partition table for 8 MB
+## 2. Partition table for 8 MB (done: `partitions_8mb.csv`)
 
-The current `partitions.csv` ends at 0x830000, which is past the end of an 8 MB (0x800000) flash. A layout that fits, with two app slots (rollback OTA), LittleFS and a core dump area:
+The original 16 MB `partitions.csv` ends at 0x830000, which is past the end of an 8 MB (0x800000) flash. A layout that fits, with two app slots (rollback OTA), LittleFS and a core dump area:
 
 ```
 # Name,     Type, SubType,  Offset,    Size
@@ -43,9 +43,9 @@ littlefs,   data, spiffs,   0x360000,  0x400000
 coredump,   data, coredump, 0x760000,  0x10000
 ```
 
-Each app slot is 1.625 MB, which leaves about 0.5 MB of headroom over a 1.1 MB application. LittleFS gets 4 MB and the table ends at 0x770000, under the 0x800000 limit. This table is a suggestion that was not built; adjust the slot sizes if the application grows.
+Each app slot is 1.625 MB, which leaves about 0.5 MB of headroom over a 1.1 MB application. LittleFS gets 4 MB and the table ends at 0x770000, under the 0x800000 limit. The firmware builds with this table (the app is about 1.11 MB, 68 % of a slot); adjust the slot sizes if the application grows.
 
-## 3. Recommended: pin definitions in `board.h`
+## 3. Pin definitions (done: `boards/ghostlight_rev1.h`)
 
 The existing DMX and W5500 pins already match the hardware. Port LEDs and the new signals need updates:
 
@@ -65,14 +65,14 @@ The existing DMX and W5500 pins already match the hardware. Port LEDs and the ne
 #define BOARD_STATUS_LED_GPIO   48               /* WS2812 */
 #define BOARD_RESET_BUTTON_GPIO 0                /* BOOT, active low */
 
-#define BOARD_W5500_RST_GPIO    4                /* NEW: not driven by current firmware */
+#define BOARD_W5500_RST_GPIO    4                /* NEW (named BOARD_ETH_RST_GPIO in the firmware) */
 ```
 
-`BOARD_DMX_BIAS_GPIO` and `BOARD_W5500_RST_GPIO` are not used by the current firmware; they are listed so a future change can use them. If you drive the bias pins, drive them **low during boot** (they are low by default) and set high only when the port is an output or the bus needs bias.
+In the board profile the W5500 reset is named `BOARD_ETH_RST_GPIO`. The firmware drives the bias pins **low during boot** and sets them high only while the port is an output or RDM controller (the controller biases the line, as E1.20 expects).
 
-## 4. Optional: W5500 hardware reset
+## 4. W5500 hardware reset (done)
 
-`network_manager.c` configures the W5500 driver with `reset_gpio_num = -1`. The board has the RST pin on GPIO4 with a pull-up. Setting `reset_gpio_num = 4` makes a software-initiated hardware reset of the W5500 possible after faults.
+`network_manager.c` passes the board's `BOARD_ETH_RST_GPIO` (GPIO4 on rev1, with a pull-up) to the W5500 driver as `reset_gpio_num`, so the driver resets the chip in hardware when it starts.
 
 ## 5. Console
 

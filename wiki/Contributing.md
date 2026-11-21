@@ -6,7 +6,7 @@ Results from a built board are the most valuable contribution.
 
 1. **Build one** and post results: photos, scope captures of A/B, rail voltages, what broke.
 2. **Verify** items on [[Known Issues]] and report the outcome.
-3. **Firmware:** build with ESP-IDF 5.2.6 and report whether the N8 changes work.
+3. **Firmware:** flash `tools/build.sh ghostlight-rev1` onto a built board and report what works.
 4. **Docs:** fix mistakes, add enclosure drawings, assembly photos.
 
 ## Workflow

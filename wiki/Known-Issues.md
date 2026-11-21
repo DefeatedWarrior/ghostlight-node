@@ -42,8 +42,8 @@ rev1 is **not built or tested**. This page separates what was checked from what 
 
 ### Firmware
 
-17. N8 changes applied but **not built or run**.
-18. Port LEDs now `{5, 6}`; bias and W5500 reset defines exist but are unused.
+17. rev1 firmware **builds cleanly** but has **not been run** on a board.
+18. Port LEDs, DMX bias switches and W5500 reset are driven by the firmware (not checked on hardware).
 19. UART0 is shared by J7 and J5 pins 4-5.
 
 Full detail: [`docs/11`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/docs/11-known-issues-and-verification-status.md).

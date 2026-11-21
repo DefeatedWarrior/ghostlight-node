@@ -27,7 +27,7 @@ Hand-assemble following [[Assembly Guide]], then power it up in the order in [[B
 
 ## 5. Flash and use
 
-Install ESP-IDF, delete any old `sdkconfig`, build and flash `firmware/` ([[Firmware]]). Then open the web interface ([[Using the Node]]).
+Install ESP-IDF 5.2.6, then build and flash with `cd firmware && tools/build.sh ghostlight-rev1 -p PORT flash monitor` ([[Firmware]]). Then open the web interface ([[Using the Node]]).
 
 ## 🧰 What you need
 

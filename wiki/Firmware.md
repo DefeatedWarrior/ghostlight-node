@@ -1,19 +1,45 @@
 # 💾 Firmware
 
-The firmware lives in [`firmware/`](https://github.com/DefeatedWarrior/ghostlight-node/tree/main/firmware): ESP-IDF v5.2.6, MIT licence, originally **ESP-NODE-2RDM** by ThinhCNTT22. It still identifies the board as `ESP-NODE-2RDM`.
+The firmware lives in [`firmware/`](https://github.com/DefeatedWarrior/ghostlight-node/tree/main/firmware). It uses ESP-IDF v5.2.6 and the MIT licence, and started as **ESP-NODE-2RDM** by ThinhCNTT22. It still calls itself `ESP-NODE-2RDM` in places.
 
 > [!WARNING]
-> The N8 changes are applied but **not built or run on hardware yet** (no ESP-IDF was available when they were made).
+> The rev1 build compiles with no warnings, and CI builds it on every change, but **it has not been run on a Ghostlight board yet**. The same firmware runs on the N16R8 dev-board prototype.
 
-## What changed for the N8 module
+## Build and flash
 
-| File | Change |
-|---|---|
-| `sdkconfig.defaults` | 8 MB flash, PSRAM options removed |
-| `partitions.csv` | 8 MB layout (below) |
-| `components/board/include/board.h` | `BOARD_PORT_LED_GPIO { 5, 6 }`, plus unused `BOARD_DMX_BIAS_GPIO { 1, 2 }` and `BOARD_W5500_RST_GPIO 4` |
+```bash
+cd firmware
+tools/build.sh ghostlight-rev1                          # build
+tools/build.sh ghostlight-rev1 -p /dev/ttyACM0 flash monitor
+```
 
-### Partition table (8 MB)
+`tools/build.sh` loads ESP-IDF itself if `~/esp/esp-idf` holds v5.2.6; otherwise run `. $IDF_PATH/export.sh` first. Plain `idf.py build` builds rev1 too. If you have an `sdkconfig` left over from an older firmware, delete it first, because it keeps its old settings.
+
+To enter download mode over USB-C, hold **BOOT**, tap **RESET**, then release BOOT.
+
+## Boards
+
+| `tools/build.sh …` | Hardware | Flash / PSRAM |
+|---|---|---|
+| `ghostlight-rev1` | this board (ESP32-S3-WROOM-1-N8) | 8 MB / none |
+| `esp-node-2rdm` | ESP32-S3 N16R8 dev-board prototype | 16 MB / 8 MB |
+| `esp32-devkitc` | original ESP32 DevKitC + W5500 + 2 transceivers (never run) | 4 MB / none |
+
+Each board has its own partition table. Flashing a build made for a different board erases the stored settings and scenes.
+
+## What rev1 uses
+
+| Signal | GPIO | Firmware |
+|---|---|---|
+| DMX 1 / 2 TX, RX, DIR | 17 / 15, 16 / 18, 39 / 40 | UART1 / UART2 |
+| DMX bias switches | 1 / 2 | low at boot, high while the port is an output or RDM controller |
+| Port LEDs | 5 / 6 | off = disabled, slow blink = no data, on = data, fast blink = identify / test |
+| W5500 (SPI2) | SCK 12, MOSI 11, MISO 13, CS 10, INT 9 | Ethernet |
+| W5500 reset | 4 | hardware reset when the driver starts |
+| Status LED | 48 | WS2812 |
+| BOOT button | 0 | hold 10 s to factory reset |
+
+### Partition table (8 MB, `partitions_8mb.csv`)
 
 | Name | Type | Offset | Size |
 |---|---|---|---|
@@ -25,29 +51,14 @@ The firmware lives in [`firmware/`](https://github.com/DefeatedWarrior/ghostligh
 | littlefs | data | 0x360000 | 0x400000 |
 | coredump | data | 0x760000 | 0x10000 |
 
-Ends at 0x770000. Checked for overlaps and 64 KB app alignment only. The app is about 1.1 MB, so each 1.6 MB slot has headroom.
+The app is about 1.11 MB, which is 68 % of each 1.625 MB slot.
 
-## Build and flash
+## Feature switches
 
-```bash
-. $IDF_PATH/export.sh
-cd firmware
-rm -f sdkconfig sdkconfig.old     # drop old 16 MB / PSRAM settings
-idf.py set-target esp32s3
-idf.py fullclean
-idf.py build
-idf.py -p /dev/ttyACM0 flash monitor
-```
-
-On the board, hold **BOOT**, tap **RESET**, release BOOT to enter download mode over USB-C.
-
-## Not used by the firmware yet
-
-- **W5500 hardware reset (GPIO4):** the driver has `reset_gpio_num = -1`. Setting it to 4 allows a hardware reset after faults.
-- **DMX bias switches (GPIO1/2):** not driven, so bias is off.
+Under **menuconfig → ESP-NODE → Features** (`tools/build.sh ghostlight-rev1 menuconfig`) you can switch off sACN, RDM, scenes, DMX tools, the web log, mDNS or Ethernet. All of them are on by default.
 
 ## Memory
 
-With no PSRAM everything runs from the 512 KB internal SRAM. The diagnostic log ring falls back to internal RAM automatically. Watch `heap_caps_get_free_size()` during an Art-Net/sACN burst with Wi-Fi, Ethernet and the web UI active.
+With no PSRAM everything runs from the 512 KB internal SRAM, about half of which is used statically. Watch `heap_caps_get_free_size()` during an Art-Net/sACN burst with Wi-Fi, Ethernet and the web UI active.
 
-More: [`docs/13-firmware-integration.md`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/docs/13-firmware-integration.md).
+More: [`firmware/docs/DEVELOPING.md`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/firmware/docs/DEVELOPING.md) and [`docs/13-firmware-integration.md`](https://github.com/DefeatedWarrior/ghostlight-node/blob/main/docs/13-firmware-integration.md).

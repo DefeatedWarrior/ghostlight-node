@@ -6,7 +6,8 @@ Named **Ghostlight Node** (repository `ghostlight-node`). The firmware still cal
 
 First complete design.
 
-- `firmware/`: ESP-NODE-2RDM firmware (MIT, ThinhCNTT22) with N8 changes applied: 8 MB flash, PSRAM disabled, 8 MB partition table, port LEDs on GPIO5/6. Not built or tested.
+- `firmware/`: ESP-NODE-2RDM firmware (MIT, ThinhCNTT22) with N8 changes applied: 8 MB flash, PSRAM disabled, 8 MB partition table, port LEDs on GPIO5/6.
+- `firmware/`: board profiles (`tools/build.sh ghostlight-rev1 | esp-node-2rdm | esp32-devkitc`) with one partition table per flash size, build-time feature switches (menuconfig > ESP-NODE > Features), DMX bias switches and the W5500 hardware reset driven on rev1, `main.c` split into smaller files, CI builds for every board, and `firmware/docs/DEVELOPING.md`. Builds cleanly; not run on a Ghostlight board yet.
 
 - 100 x 100 mm, 2-layer board with ESP32-S3-WROOM-1-N8, W5500 Ethernet and two SN65HVD72 DMX ports.
 - IN and OUT 3-position screw terminals per DMX port in parallel on a single transceiver; jumper termination and GPIO-switchable bias; SM712 TVS per port.

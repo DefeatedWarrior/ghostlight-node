@@ -45,7 +45,7 @@ A *ghost light* is the single bulb left burning on an otherwise dark stage. The 
 2. **Order parts:** import `bom/BOM_order_purchase.csv` into LCSC's BOM tool, scale for your board count, add about 10 % spare passives, check stock ([guide](docs/08-ordering-guide.md)).
 3. **Assemble** by hand: [assembly guide](docs/09-assembly-guide.md).
 4. **Bring up** in order (USB power, 3V3, Ethernet, DMX, then PoE): [test plan](docs/10-bring-up-and-test.md).
-5. **Flash the firmware** from [`firmware/`](firmware/) with ESP-IDF ([notes](docs/13-firmware-integration.md)). Delete any old generated `sdkconfig` first.
+5. **Flash the firmware** from [`firmware/`](firmware/) with ESP-IDF 5.2.6: `cd firmware && tools/build.sh ghostlight-rev1 -p PORT flash monitor` ([firmware guide](firmware/docs/DEVELOPING.md), [hardware notes](docs/13-firmware-integration.md)).
 
 ## Repository layout
 
@@ -54,7 +54,7 @@ A *ghost light* is the single bulb left burning on an otherwise dark stage. The 
 | `hardware/kicad/` | KiCad 7 project, `ESPNODE` symbol library and `ESPNODE.pretty` footprints |
 | `fabrication/` | Gerber/drill zip for JLCPCB, individual gerbers, `pos.csv` |
 | `bom/` | `BOM_order.csv` (per line, with designators), `BOM_order_purchase.csv` (LCSC part + quantity), `netlist.net` |
-| `firmware/` | ESP-IDF firmware, adjusted for the N8 module (untested, MIT) |
+| `firmware/` | ESP-IDF firmware (MIT): board profiles for rev1 and other ESP32 boards, build-time feature switches |
 | `docs/` | Full documentation, schematic PDF, images |
 | `wiki/` | Wiki pages (Home, FAQ, troubleshooting...) ready to publish to the GitHub wiki |
 | `tools/generator/` | Python scripts that generated the board (reference only) |
@@ -73,7 +73,7 @@ The schematic is in [docs/schematic.pdf](docs/schematic.pdf).
 
 ## Firmware
 
-[`firmware/`](firmware/) is the ESP-IDF firmware (MIT, see `firmware/LICENSE`, originally ESP-NODE-2RDM by ThinhCNTT22). The N8 changes are applied: 8 MB flash, PSRAM disabled, 8 MB partition table, port LEDs on GPIO5/6. **It has not been built or run on hardware yet.** The firmware still identifies the board as `ESP-NODE-2RDM`.
+[`firmware/`](firmware/) is the ESP-IDF firmware (MIT, see `firmware/LICENSE`, originally ESP-NODE-2RDM by ThinhCNTT22). It has a board profile for rev1 (8 MB flash, no PSRAM, 8 MB partition table, port LEDs on GPIO5/6, DMX bias switches, W5500 reset), plus profiles for the N16R8 dev-board prototype and a plain ESP32 DevKitC. Optional features (sACN, RDM, scenes, DMX tools, web log, mDNS, Ethernet) can be switched off at build time. The firmware builds with ESP-IDF 5.2.6 for this board (`tools/build.sh ghostlight-rev1`) with no warnings, and CI builds it on every change. **It has not been run on a Ghostlight board yet**; the same firmware runs on the N16R8 dev-board prototype. The firmware still calls itself `ESP-NODE-2RDM` in places. See [firmware/docs/DEVELOPING.md](firmware/docs/DEVELOPING.md).
 
 ## Contributing
 
